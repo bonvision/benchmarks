@@ -15,7 +15,7 @@
         <Combinator xsi:type="gl:CreateWindow">
           <gl:Width>640</gl:Width>
           <gl:Height>480</gl:Height>
-          <gl:VSync>Adaptive</gl:VSync>
+          <gl:VSync>On</gl:VSync>
           <gl:SwapSync>false</gl:SwapSync>
           <gl:ClearColor>Gray</gl:ClearColor>
           <gl:ClearMask>DepthBufferBit ColorBufferBit</gl:ClearMask>
