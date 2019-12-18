@@ -3,7 +3,6 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:q1="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:q2="clr-namespace:Bonsai.Harp.CF;assembly=Bonsai.Harp.CF"
-                 xmlns:q3="clr-namespace:;assembly=Extensions"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
@@ -23,28 +22,6 @@
         <q2:Type>AnalogInput</q2:Type>
         <q2:Mask>Port0</q2:Mask>
       </Expression>
-      <Expression xsi:type="q2:BehaviorEvent">
-        <q2:Type>Input</q2:Type>
-        <q2:Mask>Poke1InfraRedBeam</q2:Mask>
-      </Expression>
-      <Expression xsi:type="Condition">
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="WorkflowInput">
-              <Name>Source1</Name>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-          </Edges>
-        </Workflow>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="q3:SendKeys">
-          <q3:KeyCode>32</q3:KeyCode>
-        </Combinator>
-      </Expression>
       <Expression xsi:type="MemberSelector">
         <Selector>MessageBytes</Selector>
       </Expression>
@@ -60,10 +37,7 @@
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
       <Edge From="0" To="2" Label="Source1" />
-      <Edge From="0" To="5" Label="Source1" />
       <Edge From="2" To="3" Label="Source1" />
-      <Edge From="3" To="4" Label="Source1" />
-      <Edge From="5" To="6" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
