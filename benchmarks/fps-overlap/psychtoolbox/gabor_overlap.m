@@ -1,11 +1,11 @@
 blankDurationSecs=2; % Start with blank for 2 seconds.
 movieDurationSecs=3; % Abort trial after 3 seconds.
 texsize=100; % Half-Size of the grating image.
-f=0.01; % Grating cycles/pixel
+f=0.02; % Grating cycles/pixel
 cyclespersecond=1; % Speed of grating in cycles per second
 angle=0; % Angle of grating
-gridsizes = [2,4,8,16,32,64,128,256]; % Benchmark grid sizes
-
+gridsizes = 2.^[1:8]; % Benchmark grid sizes
+    
 try
     AssertOpenGL;
 
@@ -19,7 +19,7 @@ try
     % Round gray to integral number, to avoid roundoff artifacts with some
     % graphics cards:
     gray=round((white+black)/2);
-    inc = white-black;
+    inc = floor((white-black)/2);
     
     % Open a double buffered fullscreen window with a gray background:
     w =Screen('OpenWindow',screenNumber, gray);
@@ -45,7 +45,7 @@ try
     x = meshgrid(-texsize:texsize + p, -texsize:texsize);
     grating = gray + inc*cos(fr*x);
 
-    % Create circular aperture for the alpha-channel:
+    % Create circulaqr aperture for the alpha-channel:
     [x,y]=meshgrid(-texsize:texsize, -texsize:texsize);
     circle = white * (x.^2 + y.^2 <= (texsize)^2);
 
@@ -80,13 +80,13 @@ try
     vbl = Screen('Flip', w);
     
     % Run through all benchmark grid sizes
-    for gridsize = gridsizes
+    for gridsize = 1:length(gridsizes)
     
         rotation_angles = linspace(1,360, gridsizes(gridsize));
         
-        % Compute size of each grating in the grid
-        sizeX = width;
-        sizeY = height;
+%         % Compute size of each grating in the grid
+%         sizeX = width;
+%         sizeY = height;
 
         % We run at most 'blankDurationSecs' seconds.
         vblendtime = vbl + blankDurationSecs;
@@ -115,13 +115,15 @@ try
             yoffset = mod(i*shiftperframe,p);
             i=i+1;
 
-            for k = 1:gridsize
-              xoff = sizeX;
-              yoff = sizeY;
+            for k = 1:gridsizes(gridsize)
+%               xoff = width/2;
+%               yoff = height/2;
               srcRect=[0 0 visiblesize visiblesize];
-              dstRect = [xoff yoff sizeX+xoff sizeY+yoff];
-              % Draw first grating texture, rotated by "angle":
-              Screen('DrawTexture', w, gratingtex, srcRect, dstRect, rotation_angles(gridsize), [], 0.1, [], [], [], [0, yoffset, 0, 0]);
+              dstRect = [(width-height)/2 0 (width+height)/2 height];
+%               disp(num2str(rotation_angles(k)));
+              % Draw first grating texqtureq, rotated by "angle":
+              global_alpha = 0.1;
+              Screen('DrawTexture', w, gratingtex, srcRect, dstRect, rotation_angles(k), [], global_alpha, [], [], [], [0, yoffset, 0, 0]);
             end
 
             colour = 255 - colour;
