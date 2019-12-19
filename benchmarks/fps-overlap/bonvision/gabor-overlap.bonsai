@@ -72,7 +72,7 @@
           <int>32</int>
           <int>64</int>
           <int>128</int>
-          <int>512</int>
+          <int>256</int>
         </Value>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -102,7 +102,7 @@
                   <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.ParameterRange.bonsai">
                     <RangeMin>1</RangeMin>
                     <RangeMax>360</RangeMax>
-                    <Count>512</Count>
+                    <Count>256</Count>
                   </Expression>
                   <Expression xsi:type="scr:ExpressionTransform">
                     <scr:Expression>single(it)</scr:Expression>
@@ -137,7 +137,7 @@
                           <Radius>1</Radius>
                           <Aperture>0</Aperture>
                           <Opacity>0.1</Opacity>
-                          <ExtentX>1.5</ExtentX>
+                          <ExtentX>1.2</ExtentX>
                           <ExtentY>2</ExtentY>
                         </Expression>
                         <Expression xsi:type="Combinator">
