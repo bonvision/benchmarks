@@ -1,10 +1,10 @@
 blankDurationSecs=2; % Start with blank for 2 seconds.
 movieDurationSecs=3; % Abort trial after 3 seconds.
-texsize=100; % Half-Size of the grating image.
-f=0.02; % Grating cycles/pixel
+% texsize=100; % Half-Size of the grating image.
+f=0.002; % Grating cycles/pixel
 cyclespersecond=1; % Speed of grating in cycles per second
 angle=0; % Angle of grating
-gridsizes = 2.^[1:8]; % Benchmark grid sizes
+gridsizes = 2.^[0:8]; % Benchmark grid sizes
     
 try
     AssertOpenGL;
@@ -39,6 +39,7 @@ try
     % Calculate parameters of the grating:
     p=ceil(1/f); % pixels/cycle, rounded up.
     fr=f*2*pi;
+    texsize = height/2;
     visiblesize=2*texsize+1;
 
     % Create one single static grating image:
