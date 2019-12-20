@@ -33,6 +33,7 @@ def latency(fname,threshold=50):
     return analog,feedback,dfeedback,impulsetimes,responsetimes,latency
 
 def visualize_latency(latency):
+    plt.figure()
     plt.plot(latency[0].Timestamp,latency[0].DataElement0)
     plt.vlines(latency[3],0,200,colors='k',label='input')
     plt.vlines(latency[4],0,200,colors='r',label='response')
@@ -41,13 +42,29 @@ def visualize_latency(latency):
     plt.legend()
     
 def stats_latency(groups,labels=None):
+    plt.figure()
     results = [latency[5] for latency in groups]
     x = range(len(results))
     if labels is None:
         labels = [latency[5].name for latency in groups]
     mean = [r.mean() for r in results]
-    sem = [r.sem() for r in results]
+    sem = [r.std() for r in results]
     plt.bar(x,mean)
     plt.errorbar(x,mean,sem,ecolor='k',fmt='none')
     plt.ylabel('Latency (ms)')
     plt.xticks(x,labels,rotation=45,ha='right')
+    
+def hist_latency(groups,labels=None,fps=60,**kwargs):
+    plt.figure()
+    binstep = 1000.0 / (fps*6)
+    results = [latency[5] for latency in groups]
+    if labels is None:
+        labels = [latency[5].name for latency in groups]
+    for r,label in zip(results,labels):
+        minbin = np.floor_divide(r.min(), binstep) * binstep
+        maxbin = np.floor_divide(r.max(), binstep)
+        bins = np.arange(minbin,(maxbin+1)*binstep,binstep)
+        plt.hist(r,bins=bins,label=label,**kwargs)
+    plt.xlabel('Latency (ms)')
+    plt.ylabel('Frequency')
+    plt.legend()
