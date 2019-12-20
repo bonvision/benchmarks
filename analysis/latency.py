@@ -54,9 +54,9 @@ def stats_latency(groups,labels=None):
     plt.ylabel('Latency (ms)')
     plt.xticks(x,labels,rotation=45,ha='right')
     
-def hist_latency(groups,labels=None,fps=60,**kwargs):
+def hist_latency(groups,labels=None,fps=720,**kwargs):
     plt.figure()
-    binstep = 1000.0 / (fps*6)
+    binstep = 1000.0 / fps
     results = [latency[5] for latency in groups]
     if labels is None:
         labels = [latency[5].name for latency in groups]
