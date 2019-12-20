@@ -11,6 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 gridsizes = [1,2,3,4,6,8,12,16,24,32,48,64]
+overlap = [2,4,8,16,32,64,128,256]
 
 def fps(fname,threshold=50):
     data = pd.read_csv(fname,usecols=range(4))
@@ -29,7 +30,6 @@ def stats_fps(trials,**kwargs):
     x = range(len(data.columns))
     meanfps = data.mean()
     plt.errorbar(x,meanfps,data.std(),**kwargs)
-    plt.xticks(x,[gridsizes[i]**2 for i in x])
     plt.xlabel('Number of Elements')
     plt.ylabel('Frames / second')
 
