@@ -19,6 +19,7 @@ try
     % Round gray to integral number, to avoid roundoff artifacts with some
     % graphics cards:
     gray=round((white+black)/2);
+    inc=white-gray;
 
     % Open a double buffered fullscreen window with a gray background:
     w =Screen('OpenWindow',screenNumber, gray);
