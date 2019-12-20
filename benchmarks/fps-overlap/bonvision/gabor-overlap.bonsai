@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.4.0"
+<WorkflowBuilder Version="2.4.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
@@ -7,6 +7,7 @@
                  xmlns:sys="clr-namespace:System;assembly=mscorlib"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
+                 xmlns:p1="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -24,6 +25,7 @@
           <gl:WindowState>Fullscreen</gl:WindowState>
           <gl:DisplayDevice>Primary</gl:DisplayDevice>
           <gl:TargetRenderFrequency>0</gl:TargetRenderFrequency>
+          <gl:TargetUpdateFrequency xsi:nil="true" />
           <gl:RenderState />
           <gl:GraphicsMode>
             <gl:ColorFormat>
@@ -104,8 +106,8 @@
                     <RangeMax>360</RangeMax>
                     <Count>256</Count>
                   </Expression>
-                  <Expression xsi:type="scr:ExpressionTransform">
-                    <scr:Expression>single(it)</scr:Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="p1:DegreeToRadian" />
                   </Expression>
                   <Expression xsi:type="SelectMany">
                     <Workflow>
@@ -128,7 +130,7 @@
                         <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawGratings.bonsai">
                           <LocationX>0</LocationX>
                           <LocationY>0</LocationY>
-                          <Angle>20626.48</Angle>
+                          <Angle>360</Angle>
                           <SpatialFrequency>2</SpatialFrequency>
                           <TemporalFrequency>1</TemporalFrequency>
                           <Phase>0</Phase>
@@ -207,7 +209,7 @@ Value as Viewport)</scr:Expression>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="gl:Timer">
-                <gl:DueTime>PT2S</gl:DueTime>
+                <gl:DueTime>PT3S</gl:DueTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">

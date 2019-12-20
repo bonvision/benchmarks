@@ -4,7 +4,7 @@ movieDurationSecs=3; % Abort trial after 3 seconds.
 f=0.002; % Grating cycles/pixel
 cyclespersecond=1; % Speed of grating in cycles per second
 angle=0; % Angle of grating
-gridsizes = 2.^[0:8]; % Benchmark grid sizes
+gridsizes = 2.^[1:8]; % Benchmark grid sizes
     
 try
     AssertOpenGL;
