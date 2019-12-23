@@ -19,7 +19,7 @@ void setup() {
 void loop() {
   if (count < 1000) {
     digitalWrite(LED_BUILTIN, LOW);    // turn the LED off (LOW is the voltage level)
-    delay(100);                        // wait for a bit
+    delay(150);                        // wait for a bit
     digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on by making the voltage HIGH
     delay(random(250,500));            // wait for a random bit
     count += 1;
