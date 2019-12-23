@@ -5,7 +5,6 @@ Created on Mon Dec 16 19:07:55 2019
 @author: aman
 """
 
-import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -13,7 +12,7 @@ import matplotlib.pyplot as plt
 gridsizes = [1,2,3,4,6,8,12,16,24,32,48,64]
 overlap = [2,4,8,16,32,64,128,256]
 
-def fps(fname,threshold=50):
+def load(fname,threshold=50):
     data = pd.read_csv(fname,usecols=range(4))
     sync = data.DataElement0.diff()
     dsync = sync > threshold
@@ -32,13 +31,3 @@ def stats_fps(trials,**kwargs):
     plt.errorbar(x,meanfps,data.std(),**kwargs)
     plt.xlabel('Number of Elements')
     plt.ylabel('Frames / second')
-
-def trials(dname,fun,include=None):
-    if include is None:
-        include = lambda x:True
-    elif type(include) is str:
-        suffix = include
-        include = lambda x:x.endswith(suffix)        
-    return [fun(os.path.join(dname, fname))
-            for fname in os.listdir(dname)
-            if include(fname)]

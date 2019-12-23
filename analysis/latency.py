@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def latency(fname,threshold=50,iti=0,ioffset=0):
+def load(fname,threshold=50,iti=0,ioffset=0):
     parts = os.path.split(fname)[1].split('_')
     if threshold == 'file':
         threshold = int(parts[1])
@@ -70,5 +70,5 @@ def hist_latency(groups,labels=None,fps=720,**kwargs):
         bins = np.arange(minbin,(maxbin+1)*binstep,binstep)
         plt.hist(r,bins=bins,label=label,**kwargs)
     plt.xlabel('Latency (ms)')
-    plt.ylabel('Frequency')
+    plt.ylabel('Trials')
     plt.legend()
