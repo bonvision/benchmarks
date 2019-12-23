@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def latency(fname,threshold=50):
+def latency(fname,threshold=50,iti=0,ioffset=0):
     parts = os.path.split(fname)[1].split('_')
     if threshold == 'file':
         threshold = int(parts[1])
@@ -22,7 +22,11 @@ def latency(fname,threshold=50):
     dfeedback = (feedback > threshold).astype(np.int8)
     rising = np.flatnonzero(dfeedback.diff() > 0.0)
     impulsetimes = digital[digital.DataElement0 == 1].Timestamp
-    responsetimes = analog.Timestamp.iloc[rising]
+    responsetimes = analog.Timestamp.iloc[rising+ioffset]
+    if iti > 0:
+        valid = ~(responsetimes.diff() < iti)
+        responsetimes = responsetimes[valid]
+    
     if len(impulsetimes) != len(responsetimes):
         print("WARNING: Impulse/response mismatch! Review threshold value.")
     
