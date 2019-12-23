@@ -60,5 +60,5 @@ def fig_latency_hardware():
                  threshold=200,iti=0.2,ioffset=-1) # cleanup HMD photo-response
     data[1] = hmd[0]
     latency.hist_latency(data[::-1],alpha=0.8)
-    plt.title('Closed-loop latency @ 60Hz')
+    plt.title('Hardware display latency')
     plt.show()
