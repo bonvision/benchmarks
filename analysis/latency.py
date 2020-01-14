@@ -72,3 +72,41 @@ def hist_latency(groups,labels=None,fps=720,**kwargs):
     plt.xlabel('Latency (ms)')
     plt.ylabel('Trials')
     plt.legend()
+    
+def hist_latency_frames(groups,labels=None,fps=720,**kwargs):
+    plt.figure()
+    binstep = 1000.0 / fps
+    binstep = binstep / 16.67
+    ifi = [16.67, 11.11, 6.94]
+    results = [groups[group_i][5]/ifi[group_i] for group_i in range(len(groups))]
+    print(ifi)
+    if labels is None:
+        labels = [latency[5].name for latency in groups]
+        print(labels)
+    for r,label in zip(results,labels):
+        minbin = np.floor_divide(r.min(), binstep) * binstep
+        maxbin = np.floor_divide(r.max(), binstep)
+        bins = np.arange(minbin,(maxbin+1)*binstep,binstep)
+        plt.hist(r,bins=bins,label=label,**kwargs)
+    plt.xlabel('Latency (ms)')
+    plt.ylabel('Trials')
+    plt.legend()
+    
+def hist_sf_latency_frames(groups,labels=None,fps=720,**kwargs):
+    plt.figure()
+    binstep = 1000.0 / fps
+    binstep = binstep / 16.67
+    ifi = [16.67, 16.67]
+    results = [groups[group_i][5]/ifi[group_i] for group_i in range(len(groups))]
+    print(ifi)
+    if labels is None:
+        labels = [latency[5].name for latency in groups]
+        print(labels)
+    for r,label in zip(results,labels):
+        minbin = np.floor_divide(r.min(), binstep) * binstep
+        maxbin = np.floor_divide(r.max(), binstep)
+        bins = np.arange(minbin,(maxbin+1)*binstep,binstep)
+        plt.hist(r,bins=bins,label=label,**kwargs)
+    plt.xlabel('Latency (ms)')
+    plt.ylabel('Trials')
+    plt.legend()
