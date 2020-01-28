@@ -77,7 +77,7 @@ def hist_latency_frames(groups,labels=None,fps=720,**kwargs):
     plt.figure()
     binstep = 1000.0 / fps
     binstep = binstep / 16.67
-    ifi = [16.67, 11.11, 6.94]
+    ifi = [16.6667, 11.1111, 6.9444]
     results = [groups[group_i][5]/ifi[group_i] for group_i in range(len(groups))]
     print(ifi)
     if labels is None:
