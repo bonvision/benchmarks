@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.4.1-patch"
+<WorkflowBuilder Version="2.4.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:p1="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:p2="clr-namespace:Bonsai.Harp.CF;assembly=Bonsai.Harp.CF"
