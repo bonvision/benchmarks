@@ -8,6 +8,7 @@ Created on Mon Dec 23 13:28:05 2019
 import os
 import fps
 import latency
+import roundtrip
 import matplotlib.pyplot as plt
 
 def trials(dname,module,include='.csv',**kwargs):
@@ -77,3 +78,7 @@ def fig_latency_hardware_frames():
     latency.hist_latency_frames(data[::-1],alpha=0.8)
     plt.title('Hardware display latency')
     plt.show()
+    
+def stats_roundtrip():
+    data = trials('../benchmarks/latency/harp/data',roundtrip)
+    return [(trial.mean(),2*trial.std) for trial in data]
