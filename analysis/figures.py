@@ -79,6 +79,26 @@ def fig_latency_hardware_frames():
     plt.title('Hardware display latency')
     plt.show()
     
+def stats_latency_hardware():
+    data = trials('../benchmarks/latency/acquisition/data/hardware',latency)
+    hmd = trials('../benchmarks/latency/acquisition/data/hardware-hmd',latency,
+                 threshold=200,iti=0.2,ioffset=-1) # cleanup HMD photo-response
+    data[1] = hmd[0]
+    results = (trial[5] for trial in data[::-1])
+    return [(trial.name,trial.mean(),trial.std()*2,len(trial))
+            for trial in results]
+    
+def stats_latency_hardware_frames():
+    data = trials('../benchmarks/latency/acquisition/data/hardware',latency)
+    hmd = trials('../benchmarks/latency/acquisition/data/hardware-hmd',latency,
+                 threshold=200,iti=0.2,ioffset=-1) # cleanup HMD photo-response
+    data[1] = hmd[0]
+    ifi = [1000.0 / float(trial[5].name.split('-')[1].split('Hz')[0])
+           for trial in data[::-1]]
+    results = (trial[5]/interval for trial,interval in zip(data[::-1],ifi))
+    return [(trial.name,trial.mean(),trial.std()*2,len(trial))
+            for trial in results]
+    
 def stats_roundtrip():
     data = trials('../benchmarks/latency/harp/data',roundtrip)
     return [(trial.mean(),2*trial.std) for trial in data]

@@ -77,8 +77,9 @@ def hist_latency_frames(groups,labels=None,fps=720,**kwargs):
     plt.figure()
     binstep = 1000.0 / fps
     binstep = binstep / 16.67
-    ifi = [16.6667, 11.1111, 6.9444]
-    results = [groups[group_i][5]/ifi[group_i] for group_i in range(len(groups))]
+    ifi = [1000.0 / float(latency[5].name.split('-')[1].split('Hz')[0])
+           for latency in groups]
+    results = [group[5]/interval for group,interval in zip(groups,ifi)]
     print(ifi)
     if labels is None:
         labels = [latency[5].name for latency in groups]
@@ -97,7 +98,7 @@ def hist_sf_latency_frames(groups,labels=None,fps=720,**kwargs):
     binstep = 1000.0 / fps
     binstep = binstep / 16.67
     ifi = [16.67, 16.67]
-    results = [groups[group_i][5]/ifi[group_i] for group_i in range(len(groups))]
+    results = [group[5]/interval for group,interval in zip(groups,ifi)]
     print(ifi)
     if labels is None:
         labels = [latency[5].name for latency in groups]
