@@ -73,7 +73,7 @@
           <Z>1</Z>
         </Light>
       </Expression>
-      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.OrthographicViewport.bonsai">
+      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.OrthographicView.bonsai">
         <Left>-1</Left>
         <Right>1</Right>
         <Bottom>-1</Bottom>
