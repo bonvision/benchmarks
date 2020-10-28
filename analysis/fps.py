@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 
 gridsizes = [1,2,3,4,6,8,12,16,24,32,48,64]
 overlap = [2,4,8,16,32,64,128,256]
+playbackrates = [5,10,15,30,40,60,80,100]
 
 def load(fname,threshold=50):
     data = pd.read_csv(fname,usecols=range(4))
@@ -26,8 +27,15 @@ def load(fname,threshold=50):
 def stats_fps(trials,**kwargs):
     data = pd.DataFrame([t[-1] for t in trials])
     data.dropna(axis=1,how='all',inplace=True)
-    x = range(len(data.columns))
+    x = kwargs.pop('x', range(len(data.columns)))
     meanfps = data.mean()
     plt.errorbar(x,meanfps,data.std(),**kwargs)
     plt.xlabel('Number of Elements')
     plt.ylabel('Frames / second')
+    
+def stats_frame_count(trials,**kwargs):
+    data = pd.DataFrame([(np.array([2*len(x) for x in t[-2]])) for t in trials])
+    data.dropna(axis=1,how='all',inplace=True)
+    x = kwargs.pop('x', range(len(data.columns)))
+    meanfps = data.mean()
+    plt.errorbar(x,meanfps,data.std(),**kwargs)
