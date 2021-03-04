@@ -30,8 +30,6 @@ def stats_fps(trials,**kwargs):
     x = kwargs.pop('x', range(len(data.columns)))
     meanfps = data.mean()
     plt.errorbar(x,meanfps,data.std(),**kwargs)
-    plt.xlabel('Number of Elements')
-    plt.ylabel('Frames / second')
     
 def stats_frame_count(trials,**kwargs):
     data = pd.DataFrame([(np.array([2*len(x) for x in t[-2]])) for t in trials])

@@ -36,6 +36,21 @@ def fig_fps_nonoverlap():
     plt.ylabel('Frames / second')
     plt.legend()
     plt.show()
+    
+def fig_fps_nonoverlap_144hz():
+    bv = trials('../benchmarks/fps/acquisition/data/BonVision',fps)
+    bv144 = trials('../benchmarks/fps/acquisition/data/BonVision144Hz',fps,
+                   threshold=20)
+    plt.figure()
+    fps.stats_fps(bv144,label='BonVision 144Hz')
+    fps.stats_fps(bv,label='BonVision')
+    ticks = range(len(fps.gridsizes))
+    plt.xticks(ticks,[fps.gridsizes[i]**2 for i in ticks])
+    plt.title('Non-overlapping Elements (3s / trial)')
+    plt.xlabel('Number of Elements')
+    plt.ylabel('Frames / second')
+    plt.legend()
+    plt.show()
 
 def fig_fps_overlap():
     ptb = trials('../benchmarks/fps-overlap/acquisition/data/Psychtoolbox',fps)
@@ -117,7 +132,9 @@ def fig_fps_videoplayback(size='720p'):
     plt.xlabel('Requested Frame Rate (Hz)')
     plt.ylabel('Actual Frame Rate (Hz)')
     plt.title('Resolution: {0}, Movie Frame Count = 300'.format(size.split('-')[-1]))
-    plt.legend()
+    plt.xlim(0,105)
+    plt.ylim(0,105)
+    plt.legend(loc='upper left')
 
 def fig_fps_videoplayback_framecount(size='720p'):
     labels = ['preload','stream-buf0','stream-buf1','stream-buf2','stream-buf4']
@@ -129,7 +146,8 @@ def fig_fps_videoplayback_framecount(size='720p'):
     plt.xlabel('Requested Frame Rate (Hz)')
     plt.ylabel('Measured Frame Count')
     plt.title('Resolution: {0}, Movie Frame Count = 300'.format(size.split('-')[-1]))
-    plt.ylim(277,303)
+    plt.ylim(250,310)
+    plt.ylim(50,310)
     plt.legend(loc='lower left')
     
 def aux_drop_distribution_trial(trial):

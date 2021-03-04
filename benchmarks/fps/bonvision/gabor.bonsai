@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.4.0"
+<WorkflowBuilder Version="2.6.0"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns:sys="clr-namespace:System;assembly=mscorlib"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
-                 xmlns:q1="clr-namespace:;assembly=Extensions"
+                 xmlns:p1="clr-namespace:;assembly=Extensions"
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
@@ -24,7 +24,8 @@
           <gl:WindowBorder>Resizable</gl:WindowBorder>
           <gl:WindowState>Fullscreen</gl:WindowState>
           <gl:DisplayDevice>Primary</gl:DisplayDevice>
-          <gl:TargetRenderFrequency>0</gl:TargetRenderFrequency>
+          <gl:TargetRenderFrequency>60</gl:TargetRenderFrequency>
+          <gl:TargetUpdateFrequency xsi:nil="true" />
           <gl:RenderState />
           <gl:GraphicsMode>
             <gl:ColorFormat>
@@ -105,9 +106,9 @@
                     </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="q1:GaborGrid">
-                      <q1:GridSize>64</q1:GridSize>
-                      <q1:SpatialFrequency>2</q1:SpatialFrequency>
+                    <Combinator xsi:type="p1:GaborGrid">
+                      <p1:GridSize>64</p1:GridSize>
+                      <p1:SpatialFrequency>2</p1:SpatialFrequency>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="SelectMany">
@@ -135,12 +136,14 @@
                         <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawGratings.bonsai">
                           <LocationX>0.984375</LocationX>
                           <LocationY>0.984375</LocationY>
+                          <Layer>0</Layer>
                           <Angle>0</Angle>
                           <SpatialFrequency>128</SpatialFrequency>
                           <TemporalFrequency>1</TemporalFrequency>
                           <Phase>0</Phase>
                           <SquareWave>false</SquareWave>
                           <Contrast>1</Contrast>
+                          <DutyCycle xsi:nil="true" />
                           <Radius>1</Radius>
                           <Aperture>0</Aperture>
                           <Opacity>1</Opacity>
@@ -193,6 +196,8 @@ Value as Viewport)</scr:Expression>
                     <ExtentY>0.2</ExtentY>
                     <LocationX>-0.9</LocationX>
                     <LocationY>-0.9</LocationY>
+                    <Layer>1</Layer>
+                    <Angle>0</Angle>
                     <ColorR>1</ColorR>
                     <ColorG>1</ColorG>
                     <ColorB>1</ColorB>
