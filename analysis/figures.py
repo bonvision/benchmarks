@@ -67,6 +67,22 @@ def fig_fps_overlap():
     plt.ylabel('Frames / second')
     plt.legend()
     plt.show()
+    
+def fig_fps_overlap_144Hz():
+    bv = trials('../benchmarks/fps-overlap/acquisition/data/BonVision60Hz',fps,
+                threshold=20)
+    bv144 = trials('../benchmarks/fps-overlap/acquisition/data/BonVision144Hz',fps,
+                   threshold=20)
+    plt.figure()
+    fps.stats_fps(bv144,label='BonVision 144Hz')
+    fps.stats_fps(bv,label='BonVision 60Hz')
+    ticks = range(len(fps.overlap))
+    plt.xticks(ticks,[fps.overlap[i] for i in ticks])
+    plt.title('Overlapping Elements (3s / trial)')
+    plt.xlabel('Number of Elements')
+    plt.ylabel('Frames / second')
+    plt.legend()
+    plt.show()
 
 def fig_latency_software():
     data = trials('../benchmarks/latency/acquisition/data/software',latency)
